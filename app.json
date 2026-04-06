@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "android": {
+      "permissions": [
+        "SYSTEM_ALERT_WINDOW",
+        "FOREGROUND_SERVICE"
+      ]
+    }
+  }
+}
