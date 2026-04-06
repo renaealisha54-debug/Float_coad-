@@ -1,0 +1,48 @@
+// Buddy.view.js
+import React from 'react';
+import { View, StyleSheet, Image, PanResponder, Animated } from 'react-native';
+
+const BuddyView = () => {
+  const pan = React.useRef(new Animated.ValueXY()).current;
+
+  const panResponder = React.useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
+        useNativeDriver: false,
+      }),
+      onPanResponderRelease: () => {
+        pan.extractOffset();
+      },
+    })
+  ).current;
+
+  return (
+    <Animated.View
+      style={{ transform: [{ translateX: pan.x }, { translateY: pan.y }] }}
+      {...panResponder.panHandlers}
+    >
+      <View style={styles.buddyContainer}>
+        {/* Replace with your character asset */}
+        <View style={styles.characterPlaceholder} />
+      </View>
+    </Animated.View>
+  );
+};
+
+const styles = StyleSheet.create({
+  buddyContainer: {
+    width: 60,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  characterPlaceholder: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#ff6347',
+    borderRadius: 25,
+  },
+});
+
+export default BuddyView;
