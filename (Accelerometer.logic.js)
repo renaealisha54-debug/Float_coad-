@@ -1,0 +1,12 @@
+// Accelerometer.logic.js
+import { Accelerometer } from 'expo-sensors';
+
+export const subscribeToMotion = (onShake) => {
+  Accelerometer.setUpdateInterval(100);
+  return Accelerometer.addListener(data => {
+    const totalForce = Math.abs(data.x) + Math.abs(data.y) + Math.abs(data.z);
+    if (totalForce > 2.5) { // Threshold for a shake
+      onShake();
+    }
+  });
+};
