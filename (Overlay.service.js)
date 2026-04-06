@@ -1,0 +1,11 @@
+// Overlay.service.js
+import { DeviceEventEmitter } from 'react-native';
+
+export const showOverlay = () => {
+    // Logic to trigger the native floating window
+    DeviceEventEmitter.emit('showFloatingBuddy', { visible: true });
+};
+
+export const hideOverlay = () => {
+    DeviceEventEmitter.emit('showFloatingBuddy', { visible: false });
+};
